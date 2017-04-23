@@ -23,7 +23,7 @@ var config = {
   user: 'coffeeq', //env var: PGUSER 
   database: 'coffeeq', //env var: PGDATABASE 
   password: 'QuincyJones', //env var: PGPASSWORD 
-  host: 'localhost', // Server hosting the postgres database 
+  host: 'coffeeq.c3kft858tuq1.us-west-2.rds.amazonaws.com', // Server hosting the postgres database 
   port: 5432, //env var: PGPORT 
   max: 10, // max number of clients in the pool 
   idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed 
@@ -129,6 +129,32 @@ app.post('/v1/redeem/', function (req, res) {
       });
 
 	});
+});
+
+app.get('/v1/cafe/:cafe_id', function(req, res) {
+	var cafe_id = req.params.cafe_id;
+
+	pool.connect(function(err, client, done) {
+	  if(err) { return console.error('error fetching client from pool', err); }
+
+	  var rows = [];
+	  var query = client.query('select c.*, count(t.id) from cafes c left join transactions t on (c.id = t.cafe_id) where c.id = $1 group by c.id', [cafe_id]);
+
+	  query.on('row', function(row) {
+	  	rows.push(row);
+	  });
+	  query.on('error', function(error) {
+      	console.log(error);
+      });
+
+	  query.on('end', function(result) {
+	  	console.log("in end")
+	  	if (rows.length == 0) {
+			res.send(JSON.stringify({"success" : false, "error_message" : "this cafe doesn't exist!"}));
+		}
+		else {
+			res.send(JSON.stringify({"success" : true, "name" : rows[0].name, "address" : rows[0].address, "count": rows[0].count}));
+		}
+	  })
+	})
 })
-
-
