@@ -46,70 +46,89 @@ pool.on('error', function (err, client) {
 })
 
 
-
-
 app.post('/v1/buy', function (req, res) {
-	// TODO - call method to 
-	// for (int i = 0; i < req.body.size) {
-	//     insert(...)
-	// }
-	
 	var user_id;
 
 	pool.connect(function(err, client, done) {
 	  if(err) { return console.error('error fetching client from pool', err); }
 
-	  // client.query('SELECT $1::int AS number', ['1'], function(err, result) {
 	  var query = client.query('SELECT * from users where email = $1', [req.body.email]);
-	  query.on('row', function(row) {
-	  	console.log(row);
-	    user_id = row.id;
-	    console.log("inside " + user_id);
+	  // console.log(query)
+	  var rows = [];
 
-	    if (user_id == undefined) {
-		  	var query = client.query('INSERT into users values (first_name = $1, email = $2) returning id', [req.body.first_name, req.body.email]);
+	  query.on('row', function(row) {
+	  	rows.push(row);
+	  });
+	  query.on('error', function(error) {
+      	console.log(error);
+       });
+
+	  query.on('end', function(result) {
+	  	if (rows.length == 0) {
+	  		var query = client.query('INSERT into users (first_name, email) values ($1, $2) returning id', [req.body.first_name, req.body.email]);
 		  	query.on('row', function(row) {
 		    	user_id = row.id;
 		  	});
-
-			console.log("if")
-			// query = client.query('select * from transactions', []);
-		  	query = client.query('INSERT into transactions values (buyer_id = $1::int, cafe_id = $2)', [user_id, req.body.cafe_id]);
-		  	query.on('row', function(row) {
-		    	console.log("row " + row);
-		  	});
-	  	} else {
-		  	query = client.query('INSERT into transactions (buyer_id, cafe_id) values ($1::int, $2::int)', [user_id, req.body.cafe_id]);
-		  	// query = client.query('select * from transactions', []);
-		  	query.on('row', function(row) {
-		    	console.log(row);
-		  	});
+			
+			insertTransactions(client, user_id, req.body.cafe_id, req.body.quantity);
+		}
+		else {
+      		user_id = rows[0].id;
+      		insertTransactions(client, user_id, req.body.cafe_id, req.body.quantity);
 	  	}
 
-	  	console.log("buyer_id : " + user_id);
+	  	// return the json response of success and total # of transactions for the buyer up until now
 	  	query = client.query('SELECT count(*) from transactions where buyer_id = $1', [user_id]);
 	  	query.on('row', function(row) {
-	  		// console.log("# transactions: ")
-	  		// console.log(row.count)
-	  		// console.log(JSON.stringify({"success" : true, "total" : row.count}))
 	  		res.send(JSON.stringify({"success" : true, "total" : row.count}));
 	  	});
-
-		//"{0}{1}".format("{1}", "{0}")
-  		
-
-	  });
-
+      });
 
 	});
-
-
-  	// res.send(req.body.email)
 })
+
+function insertTransactions(client, user_id, cafe_id, quantity) {
+	for (i = 0; i < quantity; i++) {
+		var query = client.query('INSERT into transactions (buyer_id, cafe_id) values ($1::int, $2::int)', [user_id, cafe_id]);
+		query.on('row', function(row) {
+			console.log(row);
+		});
+	}
+}
 
 app.post('/v1/redeem/', function (req, res) {
 	var cafe_id = req.body.cafe_id;
 
+	pool.connect(function(err, client, done) {
+	  if(err) { return console.error('error fetching client from pool', err); }
 
-	res.send("{\"success\" : true}");
+	  var rows = [];
+	  var query = client.query('SELECT t.id as trans_id, * FROM transactions t left join users u on (t.buyer_id = u.id) where cafe_id = $1 and date_redeemed is null order by date_purchased limit 1', [cafe_id]);
+
+	  query.on('row', function(row) {
+	  	rows.push(row);
+	  });
+	  query.on('error', function(error) {
+      	console.log(error);
+      });
+
+	  query.on('end', function(result) {
+	  	if (rows.length == 0) {
+			res.send(JSON.stringify({"success" : false, "error_message" : "no coffees available at this location"}));
+		}
+		else {
+			email = rows[0].email;
+			first_name = rows[0].first_name;
+			// console.log("updating " + rows[0].trans_id);
+
+			query = client.query('UPDATE transactions SET date_redeemed = now() where id = $1', [rows[0].trans_id]);
+	  		query.on('end', function(result) {
+	  			res.send(JSON.stringify({"success" : true, "patron_name" : first_name, "patron_email" : email }));
+	  		});
+	  	}
+      });
+
+	});
 })
+
+
