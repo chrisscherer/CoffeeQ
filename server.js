@@ -1,5 +1,6 @@
 var express = require('express'), app = express(), port = process.env.PORT || 3000;
 
+const util = require('util');
 
 var bodyParser = require('body-parser')
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
@@ -8,9 +9,6 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 })); 
 
 app.listen(port);
-
-console.log('todo list RESTful API server started on: ' + port);
-
 
 // database stuff
 var pg = require('pg');
@@ -34,17 +32,9 @@ var config = {
 //it will keep idle connections open for 30 seconds 
 //and set a limit of maximum 10 idle clients 
 var pool = new pg.Pool(config);
- 
 pool.on('error', function (err, client) {
-  // if an error is encountered by a client while it sits idle in the pool 
-  // the pool itself will emit an error event with both the error and 
-  // the client which emitted the original error 
-  // this is a rare occurrence but can happen if there is a network partition 
-  // between your application and the database, the database restarts, etc. 
-  // and so you might want to handle it and at least log it out 
   console.error('idle client error', err.message, err.stack)
 })
-
 
 app.post('/v1/buy', function (req, res) {
 	var user_id;
@@ -70,11 +60,11 @@ app.post('/v1/buy', function (req, res) {
 		    	user_id = row.id;
 		  	});
 			
-			insertTransactions(client, user_id, req.body.cafe_id, req.body.quantity);
+			insertTransactions(client, user_id, req.body.cafe_id, req.body.message, req.body.quantity);
 		}
 		else {
       		user_id = rows[0].id;
-      		insertTransactions(client, user_id, req.body.cafe_id, req.body.quantity);
+      		insertTransactions(client, user_id, req.body.cafe_id, req.body.message, req.body.quantity);
 	  	}
 
 	  	// return the json response of success and total # of transactions for the buyer up until now
@@ -87,9 +77,9 @@ app.post('/v1/buy', function (req, res) {
 	});
 })
 
-function insertTransactions(client, user_id, cafe_id, quantity) {
+function insertTransactions(client, user_id, cafe_id, message, quantity) {
 	for (i = 0; i < quantity; i++) {
-		var query = client.query('INSERT into transactions (buyer_id, cafe_id) values ($1::int, $2::int)', [user_id, cafe_id]);
+		var query = client.query('INSERT into transactions (buyer_id, cafe_id, message) values ($1::int, $2::int, $3)', [user_id, cafe_id, message]);
 		query.on('row', function(row) {
 			console.log(row);
 		});
@@ -119,10 +109,14 @@ app.post('/v1/redeem/', function (req, res) {
 		else {
 			email = rows[0].email;
 			first_name = rows[0].first_name;
-			// console.log("updating " + rows[0].trans_id);
+			date_purchased = rows[0].date_purchased;
 
-			query = client.query('UPDATE transactions SET date_redeemed = now() where id = $1', [rows[0].trans_id]);
+			query = client.query('UPDATE transactions SET date_redeemed = now(), redeemer_message = $1, redeemer_first_name = $2, redeemer_last_name = $3 where id = $4', [req.body.message, req.body.first_name, req.body.last_name, rows[0].trans_id]);
 	  		query.on('end', function(result) {
+	  			if (email != undefined && email != "") {
+	  				sendRedeemedEmail(email, first_name, date_purchased, req.body.first_name, req.body.message);
+	  			}
+
 	  			res.send(JSON.stringify({"success" : true, "patron_name" : first_name, "patron_email" : email }));
 	  		});
 	  	}
@@ -130,6 +124,36 @@ app.post('/v1/redeem/', function (req, res) {
 
 	});
 });
+
+function sendRedeemedEmail(email, first_name, date_purchased, redeemer_first_name, redeemer_message) {
+	var api_key = 'key-3ebbc68ff0db1c1342f1b8219e67efc6';
+	var domain = 'sandbox1f014df702eb448e9f749216d621b8ea.mailgun.org';
+	var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
+	 
+	// var redeemer_name = "<Redeemer Name>"
+	var message = "Thanks for the coffee, Bro!"
+
+	var body = util.format("Hi %s\n\nCongrats, the coffee you purchased on date has been redeemed!\nYou are a true hero and coffee ambassador for your community.\n\n", first_name) +
+	util.format("%s would like to thank you with this message:\n\n\"%s", redeemer_first_name, redeemer_message) +
+	"\"\n\nLet’s inspire others to pay it forward by sharing your good deed.\nLinks to social media including location of purchase for publicity.\n\n" +
+	"A simple act of kindness over a cup of coffee allows us to help those we may otherwise ignore, and brings together a community from all walks of life.\n\n" +
+	"Please keep being the inspiration we need!\n" +
+	"Sincerely,\n" +
+	"CoffeeQ Team"
+
+	console.log(body)
+
+	var data = {
+	  from: 'CoffeeQ <info@qdcoffee.co>',
+	  to: util.format("%s <%s>", first_name, email),
+	  subject: 'Someone Redeemed your Coffee!',
+	  text: body
+	};
+	 
+	mailgun.messages().send(data, function (error, body) {
+	  console.log(body);
+	});
+};
 
 app.get('/v1/cafe/:cafe_id', function(req, res) {
 	var cafe_id = req.params.cafe_id;
@@ -158,3 +182,8 @@ app.get('/v1/cafe/:cafe_id', function(req, res) {
 	  })
 	})
 })
+
+
+
+
+

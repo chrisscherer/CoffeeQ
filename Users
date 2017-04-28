@@ -1,0 +1,41 @@
+Users
+id
+first_name
+last_name
+email
+phone
+preferred_shop_id
+date_created
+date_modified
+
+
+cafe
+id
+name
+address?
+date_created
+date_modified
+
+
+Transaction
+id - int (pk)
+buyer_id - int (foreign key to users)
+recipient_id - int (foreign key to users) - not required
+date_purchased
+date_redeemed
+value
+
+
+actions - 
+	buy coffee. (number of coffees) - insert into transaction
+	redeem coffee - get id of oldest available transaction at location, update transactions
+
+	add buyer - insert into users
+
+	add cafe - insert into cafe
+	
+
+
+activemq? message queue for current count of transactions, push/pull - not for this iteration
+
+donate online - either to specific coffee shop or general?
