@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="ipad9_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Home View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="CoffeeQ" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="WoodBackground" translatesAutoresizingMaskIntoConstraints="NO" id="4m2-MT-mhp">
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CoffeeQLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Xbg-mR-526">
+                                <rect key="frame" x="95" y="320" width="834" height="193.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Xbg-mR-526" secondAttribute="height" multiplier="861:200" id="dt6-VQ-mjU"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="NHl-ot-Uik">
+                                <rect key="frame" x="95" y="563.5" width="834" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rB8-zK-GaZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="397" height="50"/>
+                                        <color key="backgroundColor" red="0.1137254902" green="0.20000000000000001" blue="0.39607843139999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Italic" family="Helvetica Neue" pointSize="32"/>
+                                        <size key="titleShadowOffset" width="1" height="1"/>
+                                        <state key="normal" title="Buy">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleShadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="buyButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tgN-t6-jQt"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bJo-t7-SQa">
+                                        <rect key="frame" x="437" y="0.0" width="397" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Italic" family="Helvetica Neue" pointSize="32"/>
+                                        <size key="titleShadowOffset" width="1" height="1"/>
+                                        <state key="normal" title="Redeem">
+                                            <color key="titleColor" red="0.11372549019607843" green="0.20000000000000001" blue="0.396078431372549" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="redeemButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gb7-Ng-EVW"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <textField opaque="NO" clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your email!" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S7g-v8-ghH" userLabel="Email">
+                                <rect key="frame" x="320" y="663.5" width="384" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="leJ-R4-xs1"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" misplaced="YES" text="Leave a note for someone!" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="csh-fq-M2W">
+                                <rect key="frame" x="95" y="640" width="578" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="qB2-eC-TgU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7aY-CA-ErF">
+                                <rect key="frame" x="20" y="28" width="984" height="720"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Thanks!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="db3-Kr-iwz">
+                                        <rect key="frame" x="0.0" y="100" width="984" height="200"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="72"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="coffeeQBaby" translatesAutoresizingMaskIntoConstraints="NO" id="xZa-9M-km2">
+                                        <rect key="frame" x="372" y="296" width="240" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="This was your first coffee payed forward!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dzR-ie-gom">
+                                        <rect key="frame" x="0.0" y="483" width="984" height="200"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="72"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="Xbg-mR-526" secondAttribute="trailing" constant="75" id="3mh-cn-hPb"/>
+                            <constraint firstItem="Xbg-mR-526" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="300" id="CVZ-m3-QYM"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="csh-fq-M2W" secondAttribute="bottom" constant="60" id="GnP-Fb-CVU"/>
+                            <constraint firstItem="csh-fq-M2W" firstAttribute="trailing" secondItem="NHl-ot-Uik" secondAttribute="trailing" id="IvU-VE-75Y"/>
+                            <constraint firstItem="S7g-v8-ghH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="300" id="RDu-6p-HFT"/>
+                            <constraint firstItem="csh-fq-M2W" firstAttribute="leading" secondItem="NHl-ot-Uik" secondAttribute="leading" id="Sdn-v6-5PW"/>
+                            <constraint firstItem="S7g-v8-ghH" firstAttribute="top" secondItem="NHl-ot-Uik" secondAttribute="bottom" constant="50" id="Tk9-lV-L8K"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="S7g-v8-ghH" secondAttribute="trailing" constant="300" id="Yo2-ob-UEJ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="NHl-ot-Uik" secondAttribute="trailing" constant="75" id="adP-NK-Lv1"/>
+                            <constraint firstItem="Xbg-mR-526" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="75" id="mCt-iR-2uc"/>
+                            <constraint firstItem="csh-fq-M2W" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sxY-yE-t3c"/>
+                            <constraint firstItem="NHl-ot-Uik" firstAttribute="top" secondItem="Xbg-mR-526" secondAttribute="bottom" constant="50" id="ump-62-ri1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="buttonStack" destination="NHl-ot-Uik" id="xbe-YI-0db"/>
+                        <outlet property="buyButton" destination="rB8-zK-GaZ" id="yba-k8-SJS"/>
+                        <outlet property="coffeeCountMessage" destination="dzR-ie-gom" id="ofT-QG-XAN"/>
+                        <outlet property="firstTimeCoffeeImage" destination="xZa-9M-km2" id="arR-h7-fHR"/>
+                        <outlet property="logo" destination="Xbg-mR-526" id="YjV-Vi-XX8"/>
+                        <outlet property="noteInput" destination="csh-fq-M2W" id="FyM-a2-CNQ"/>
+                        <outlet property="redeemButton" destination="bJo-t7-SQa" id="8P9-W1-Q5u"/>
+                        <outlet property="thankYouMessage" destination="db3-Kr-iwz" id="gHz-kK-k5c"/>
+                        <outlet property="userInput" destination="S7g-v8-ghH" id="9i9-AL-KA0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="114.84374999999999" y="121.875"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="CoffeeQLogo" width="397" height="99"/>
+        <image name="WoodBackground" width="640" height="480"/>
+        <image name="coffeeQBaby" width="16" height="16"/>
+    </resources>
+</document>
