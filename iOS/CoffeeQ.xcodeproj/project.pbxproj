@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		153A41FC1EACF574009CCC72 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153A41FB1EACF574009CCC72 /* Constants.swift */; };
+		1564AABD1EBAA66500866F45 /* AlamofireService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1564AABC1EBAA66500866F45 /* AlamofireService.swift */; };
+		1564AABF1EBAA67E00866F45 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1564AABE1EBAA67E00866F45 /* Alamofire.framework */; };
+		1564AAC11EBAA78700866F45 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1564AAC01EBAA78700866F45 /* ObjectMapper.framework */; };
 		15814A631EAC14D800667EC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15814A621EAC14D800667EC5 /* AppDelegate.swift */; };
 		15814A651EAC14D800667EC5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15814A641EAC14D800667EC5 /* HomeViewController.swift */; };
 		15814A681EAC14D800667EC5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15814A661EAC14D800667EC5 /* Main.storyboard */; };
@@ -20,6 +23,9 @@
 
 /* Begin PBXFileReference section */
 		153A41FB1EACF574009CCC72 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		1564AABC1EBAA66500866F45 /* AlamofireService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireService.swift; sourceTree = "<group>"; };
+		1564AABE1EBAA67E00866F45 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../Library/Developer/Xcode/DerivedData/CoffeeQ-efyiaycbaksramezofxldnlzzxwq/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
+		1564AAC01EBAA78700866F45 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = "../../../Library/Developer/Xcode/DerivedData/CoffeeQ-efyiaycbaksramezofxldnlzzxwq/Build/Products/Debug-iphonesimulator/ObjectMapper/ObjectMapper.framework"; sourceTree = "<group>"; };
 		15814A5F1EAC14D800667EC5 /* CoffeeQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoffeeQ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15814A621EAC14D800667EC5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		15814A641EAC14D800667EC5 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -39,6 +45,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1564AAC11EBAA78700866F45 /* ObjectMapper.framework in Frameworks */,
+				1564AABF1EBAA67E00866F45 /* Alamofire.framework in Frameworks */,
 				90C4DAC5B6CE961196101BA2 /* Pods_CoffeeQ.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -76,6 +84,7 @@
 				15814A711EAC14D800667EC5 /* Info.plist */,
 				15814A691EAC14D800667EC5 /* CoffeeQ.xcdatamodeld */,
 				15897B791EACF6E20023EAAA /* NetworkHelper.swift */,
+				1564AABC1EBAA66500866F45 /* AlamofireService.swift */,
 			);
 			path = CoffeeQ;
 			sourceTree = "<group>";
@@ -83,6 +92,8 @@
 		1C612B1309C94FE91ABCA050 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1564AAC01EBAA78700866F45 /* ObjectMapper.framework */,
+				1564AABE1EBAA67E00866F45 /* Alamofire.framework */,
 				783A8CDA7B544FC1F71EEF2A /* Pods_CoffeeQ.framework */,
 			);
 			name = Frameworks;
@@ -224,6 +235,7 @@
 				15814A6B1EAC14D800667EC5 /* CoffeeQ.xcdatamodeld in Sources */,
 				15897B7A1EACF6E20023EAAA /* NetworkHelper.swift in Sources */,
 				15814A631EAC14D800667EC5 /* AppDelegate.swift in Sources */,
+				1564AABD1EBAA66500866F45 /* AlamofireService.swift in Sources */,
 				153A41FC1EACF574009CCC72 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

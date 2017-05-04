@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class HomeViewController: UIViewController {
     
@@ -67,6 +68,27 @@ class HomeViewController: UIViewController {
     }
     
     func confirmPurchase(){
+        let parameters: Parameters = [
+            "email": "chrisscherer90@gmail.com",
+            "firstname": "Chris",
+            "lastname": "Scherer",
+            "cafe_id": 1,
+            "message": "Test Message",
+            "quantity": 1
+        ]
+        
+        Alamofire.request("localhost:3000/v1/buy", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON {
+            response in
+            
+            switch response.result {
+            case .success:
+                print(response.result.value)
+                break
+            case .failure:
+                break
+            }
+        }
+        
         DispatchQueue.main.async {
             UIView.animate(withDuration: 1, animations: {
                 self.logo.transform = CGAffineTransform.init(translationX: 0.0, y: 0)
