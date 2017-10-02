@@ -11,21 +11,36 @@ import Alamofire
 
 class HomeViewController: UIViewController {
     
-    @IBOutlet weak var buyButton: UIButton!
-    @IBOutlet weak var redeemButton: UIButton!
-    
-    @IBOutlet weak var buttonStack: UIStackView!
-    
-    @IBOutlet weak var userInput: UITextField!
-    @IBOutlet weak var noteInput: UITextView!
-    @IBOutlet weak var thankYouMessage: UILabel!
-    @IBOutlet weak var coffeeCountMessage: UILabel!
-    
-    @IBOutlet weak var firstTimeCoffeeImage: UIImageView!
     @IBOutlet weak var logo: UIImageView!
+    @IBOutlet weak var BuyContainer: UIView!
+    @IBOutlet weak var RedeemContainer: UIView!
+    @IBOutlet weak var BuyEmailTextField: UITextField!
+    @IBOutlet weak var BuyNoteTextView: UITextView!
+    @IBOutlet weak var RedeemEmailTextField: UITextField!
+    @IBOutlet weak var RedeemNoteTextView: UITextView!
+    @IBOutlet weak var BuyCancelButton: UIButton!
+    @IBOutlet weak var BuyConfirmButton: UIButton!
+    @IBOutlet weak var RedeemCancelButton: UIButton!
+    @IBOutlet weak var RedeemConfirmButton: UIButton!
+    
+    @IBOutlet weak var DonateSmallCoffeeButton: UIButton!
+    @IBOutlet weak var DonateMediumCoffeeButton: UIButton!
+    @IBOutlet weak var DonateLargeCoffeeButton: UIButton!
+    
+    @IBOutlet weak var RedeemSmallCoffeeButton: UIButton!
+    @IBOutlet weak var RedeemMediumCoffeeButton: UIButton!
+    @IBOutlet weak var RedeemLargeCoffeeButton: UIButton!
+    
+    @IBOutlet weak var SegmentControl: UISegmentedControl!
+    
+    private let AFService = AlamoFireService()
     
     var pageState = Constants.pageState.home
-
+    
+    var sizeState = Constants.sizeSelectionState.medium
+    
+    var currentRedemption: RedemptionResponse?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,247 +50,193 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.pageState = Constants.pageState.home
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
     func setupUI(){
-        DispatchQueue.main.async {
-            self.buyButton.layer.cornerRadius = 9
-            self.redeemButton.layer.cornerRadius = 9
-            self.noteInput.layer.cornerRadius = 9
+        
+        
+        let font = UIFont.systemFont(ofSize: 24)
+        
+        SegmentControl.setTitleTextAttributes([NSFontAttributeName: font],
+                                              for: .normal)
+        
+        self.RedeemContainer.layer.cornerRadius = 9
+        self.BuyContainer.layer.cornerRadius = 9
+        self.RedeemCancelButton.layer.cornerRadius = 28
+        self.RedeemConfirmButton.layer.cornerRadius = 28
+        self.BuyCancelButton.layer.cornerRadius = 28
+        self.BuyConfirmButton.layer.cornerRadius = 28
+        self.BuyEmailTextField.layer.cornerRadius = 4
+        self.BuyNoteTextView.layer.cornerRadius = 4
+        self.RedeemNoteTextView.layer.cornerRadius = 4
+        self.RedeemEmailTextField.layer.cornerRadius = 4
+        
+        self.DonateSmallCoffeeButton.layer.cornerRadius = 9
+        self.DonateMediumCoffeeButton.layer.cornerRadius = 9
+        self.DonateLargeCoffeeButton.layer.cornerRadius = 9
+        
+        self.DonateSmallCoffeeButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        self.DonateMediumCoffeeButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        self.DonateLargeCoffeeButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        
+        self.RedeemSmallCoffeeButton.layer.cornerRadius = 9
+        self.RedeemMediumCoffeeButton.layer.cornerRadius = 9
+        self.RedeemLargeCoffeeButton.layer.cornerRadius = 9
+        
+        self.RedeemSmallCoffeeButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        self.RedeemMediumCoffeeButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        self.RedeemLargeCoffeeButton.imageView?.contentMode = UIViewContentMode.scaleAspectFit
+        
+        self.SegmentControl.layer.cornerRadius = 500
+    }
+    
+    @IBAction func showComponent(_ sender: UISegmentedControl) {
+        if (sender.selectedSegmentIndex == 0) {
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+                    self.RedeemContainer.alpha = 0
+                    self.BuyContainer.alpha = 1
+                })
+            }
+        } else {
+            initiateRedemption()
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+                    self.RedeemContainer.alpha = 1
+                    self.BuyContainer.alpha = 0
+                })
+            }
         }
+    }
+    
+    @IBAction func donateSmallCoffeePressed(_ sender: UIButton) {
+        sizeState = Constants.sizeSelectionState.small
+        self.DonateSmallCoffeeButton.backgroundColor = Constants.coffeeQGreen
+        self.DonateMediumCoffeeButton.backgroundColor = UIColor.clear
+        self.DonateLargeCoffeeButton.backgroundColor = UIColor.clear
+    }
+    
+    @IBAction func donateMediumCoffeePressed(_ sender: UIButton) {
+        sizeState = Constants.sizeSelectionState.medium
+        self.DonateSmallCoffeeButton.backgroundColor = UIColor.clear
+        self.DonateMediumCoffeeButton.backgroundColor = Constants.coffeeQGreen
+        self.DonateLargeCoffeeButton.backgroundColor = UIColor.clear
+    }
+    
+    @IBAction func donateLargeCoffeePressed(_ sender: UIButton) {
+        sizeState = Constants.sizeSelectionState.large
+        self.DonateSmallCoffeeButton.backgroundColor = UIColor.clear
+        self.DonateMediumCoffeeButton.backgroundColor = UIColor.clear
+        self.DonateLargeCoffeeButton.backgroundColor = Constants.coffeeQGreen
+    }
+    
+    @IBAction func redeemSmallCoffeePressed(_ sender: UIButton) {
+        sizeState = Constants.sizeSelectionState.small
+        self.RedeemSmallCoffeeButton.backgroundColor = Constants.coffeeQGreen
+        self.RedeemMediumCoffeeButton.backgroundColor = UIColor.clear
+        self.RedeemLargeCoffeeButton.backgroundColor = UIColor.clear
+    }
+    
+    @IBAction func redeemMediumCoffeePressed(_ sender: UIButton) {
+        sizeState = Constants.sizeSelectionState.medium
+        self.RedeemSmallCoffeeButton.backgroundColor = UIColor.clear
+        self.RedeemMediumCoffeeButton.backgroundColor = Constants.coffeeQGreen
+        self.RedeemLargeCoffeeButton.backgroundColor = UIColor.clear
+    }
+    
+    @IBAction func redeemLargeCoffeePressed(_ sender: UIButton) {
+        sizeState = Constants.sizeSelectionState.large
+        self.RedeemSmallCoffeeButton.backgroundColor = UIColor.clear
+        self.RedeemMediumCoffeeButton.backgroundColor = UIColor.clear
+        self.RedeemLargeCoffeeButton.backgroundColor = Constants.coffeeQGreen
     }
     
     func transitionToPurchase(){
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.5, animations: {
-                self.logo.transform = CGAffineTransform.init(translationX: 0.0, y: -self.view.bounds.height / 4)
-                self.buttonStack.transform = CGAffineTransform.init(translationX: 0.0, y: -self.view.bounds.height / 4)
-                self.userInput.transform = CGAffineTransform.init(translationX: 0.0, y: -self.view.bounds.height / 4)
-                self.noteInput.transform = CGAffineTransform.init(translationX: 0.0, y: -self.view.bounds.height / 4)
-                
-                self.userInput.placeholder = "Please enter your email!"
-                self.userInput.alpha = 1.0
-                self.noteInput.alpha = 1.0
-                
-                self.redeemToCancelButton()
-            })
-        }
-        
         pageState = Constants.pageState.buy
     }
     
-    func confirmPurchase(){
-        let parameters: Parameters = [
-            "email": "chrisscherer90@gmail.com",
-            "firstname": "Chris",
-            "lastname": "Scherer",
-            "cafe_id": 1,
-            "message": "Test Message",
-            "quantity": 1
-        ]
+    @IBAction func confirmPurchase(){
+        let purchaseRequest = CompletePurchaseRequest()
         
-        Alamofire.request("localhost:3000/v1/buy", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON {
-            response in
+        purchaseRequest.customerEmail = BuyEmailTextField.text != "" ? BuyEmailTextField.text! : "default@na.com"
+        purchaseRequest.customerName = "N/A"
+        purchaseRequest.itemName = "Small Coffee"
+        purchaseRequest.itemPrice = 15.50
+        purchaseRequest.message = BuyNoteTextView.text != "" ? BuyNoteTextView.text! : "No note"
+        
+        let uri = Constants.DEV_URL + "purchases"
+        
+        AFService.makeRequest(uri, HTTPMethod.post, purchaseRequest.toJSON(), Constants.getHeaders()) {
+            (response: [CompletePurchaseResponse]) in
             
-            switch response.result {
-            case .success:
-                print(response.result.value)
-                break
-            case .failure:
-                break
+            if(response.count > 0) {
+                if(response[0].status == "C") {
+                    self.displayRedemptionCompleteModal("")
+                }
             }
-        }
-        
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 1, animations: {
-                self.logo.transform = CGAffineTransform.init(translationX: 0.0, y: 0)
-                self.buttonStack.transform = CGAffineTransform.init(translationX: 0.0, y: 0)
-                self.userInput.transform = CGAffineTransform.init(translationX: 0.0, y: 0)
-                self.noteInput.transform = CGAffineTransform.init(translationX: 0.0, y: 0)
-                
-                self.thankYouMessage.text = "Thanks for paying it forward!"
-                self.coffeeCountMessage.text = "This was your first coffee payed forward!"
-                
-                self.userInput.alpha = 0.0
-                self.noteInput.alpha = 0.0
-                self.logo.alpha = 0.0
-                self.buttonStack.alpha = 0.0
-                
-                self.thankYouMessage.alpha = 1.0
-                self.coffeeCountMessage.alpha = 1.0
-                self.firstTimeCoffeeImage.alpha = 1.0
-                
-
-                self.revertRedeemButton()
-            }, completion: { (finished: Bool) in
-                UIView.animate(withDuration: 0.5, delay: 2.0, animations: {
-                    self.userInput.alpha = 0.0
-                    self.noteInput.alpha = 0.0
-                    self.logo.alpha = 1.0
-                    self.buttonStack.alpha = 1.0
-                    
-                    self.thankYouMessage.alpha = 0.0
-                    self.coffeeCountMessage.alpha = 0.0
-                    self.firstTimeCoffeeImage.alpha = 0.0
-                    
-                    self.revertRedeemButton()
-                })
-            })
+            
         }
         
         pageState = Constants.pageState.home
     }
     
     func cancelPurchase(){
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.5, animations: {
-                self.logo.transform = CGAffineTransform.init(translationX: 0.0, y: 0)
-                self.buttonStack.transform = CGAffineTransform.init(translationX: 0.0, y: 0)
-                self.userInput.transform = CGAffineTransform.init(translationX: 0.0, y: 0)
-                self.noteInput.transform = CGAffineTransform.init(translationX: 0.0, y: 0)
-                
-                self.userInput.alpha = 0.0
-                self.noteInput.alpha = 0.0
-
-                
-                self.revertRedeemButton()
-            })
-        }
-        
         pageState = Constants.pageState.home
     }
     
-    func transitionToRedeem(){
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.5, animations: {
-                self.logo.transform = CGAffineTransform.init(translationX: 0.0, y: -self.view.bounds.height / 4)
-                self.buttonStack.transform = CGAffineTransform.init(translationX: 0.0, y: -self.view.bounds.height / 4)
-                self.userInput.transform = CGAffineTransform.init(translationX: 0.0, y: -self.view.bounds.height / 4)
-                self.noteInput.transform = CGAffineTransform.init(translationX: 0.0, y: -self.view.bounds.height / 4)
-                
-                self.userInput.placeholder = "Please enter your name!"
-                self.userInput.alpha = 1.0
-                self.noteInput.alpha = 1.0
-
-                self.buyToCancelButton()
-            })
-        }
+    func initiateRedemption() {
+        let uri = Constants.DEV_URL + "redemptions"
         
-        pageState = Constants.pageState.redeem
+        AFService.makeRequest(uri, HTTPMethod.post, [:], Constants.getHeaders()) {
+            (response: [RedemptionResponse]) in
+            
+            if(response.count > 0) {
+                self.currentRedemption = response[0]
+            }
+        }
     }
     
-    func confirmRedeem(){
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.5, animations: {
-                self.logo.transform = CGAffineTransform.init(translationX: 0.0, y: 0)
-                self.buttonStack.transform = CGAffineTransform.init(translationX: 0.0, y: 0)
-                self.userInput.transform = CGAffineTransform.init(translationX: 0.0, y: 0)
-                self.noteInput.transform = CGAffineTransform.init(translationX: 0.0, y: 0)
-                
-                self.thankYouMessage.text = "Thanks for using CoffeeQ!"
-                self.coffeeCountMessage.text = "\"I hope you enjoy your coffee! - Chris\""
-                
-                self.userInput.alpha = 0.0
-                self.noteInput.alpha = 0.0
-                self.logo.alpha = 0.0
-                self.buttonStack.alpha = 0.0
-                
-                self.thankYouMessage.alpha = 1.0
-                self.coffeeCountMessage.alpha = 1.0
-
-                self.revertBuyButton()
-            }, completion: { (finished: Bool) in
-                UIView.animate(withDuration: 0.5, delay: 2.0, animations: {
-                    self.userInput.alpha = 0.0
-                    self.noteInput.alpha = 0.0
-                    self.logo.alpha = 1.0
-                    self.buttonStack.alpha = 1.0
-                    
-                    self.thankYouMessage.alpha = 0.0
-                    self.coffeeCountMessage.alpha = 0.0
-                    
-                    self.revertRedeemButton()
-                })
-            })
+    @IBAction func confirmRedeem(){
+        if(currentRedemption == nil) {
+            return
         }
         
-        pageState = Constants.pageState.home
+        let completeRedemptionRequest = CompleteRedemptionRequest()
+        
+        completeRedemptionRequest.itemName = "Small Coffee"
+        completeRedemptionRequest.message = RedeemNoteTextView.text != "" ? RedeemNoteTextView.text! : "No Note"
+        completeRedemptionRequest.redeemerName = RedeemEmailTextField.text != "" ? RedeemEmailTextField.text! : "N/A"
+        completeRedemptionRequest.itemPrice = 2.50
+        
+        let uri = Constants.DEV_URL + "redemptions/" + (currentRedemption?.redemptionId)!
+        
+        AFService.makeRequest(uri, HTTPMethod.put, completeRedemptionRequest.toJSON(), Constants.getHeaders()) {
+            (response: [RedemptionFinalizedResponse]) in
+            if(response.count > 0) {
+                self.displayRedemptionCompleteModal("")
+            }
+        }
     }
     
     func cancelRedeem(){
+        currentRedemption = nil
+    }
+    
+    func displayRedemptionCompleteModal(_ message: String?) {
+        let defaultMessage = (message != "") ? message : "Thanks for being a part of the CoffeeQ movement!"
+        
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.5, animations: {
-                self.logo.transform = CGAffineTransform.init(translationX: 0.0, y: 0)
-                self.buttonStack.transform = CGAffineTransform.init(translationX: 0.0, y: 0)
-                self.userInput.transform = CGAffineTransform.init(translationX: 0.0, y: 0)
-                self.noteInput.transform = CGAffineTransform.init(translationX: 0.0, y: 0)
-                
-                self.userInput.alpha = 0.0
-                self.noteInput.alpha = 0.0
-
-                self.revertBuyButton()
-            })
-        }
-        
-        pageState = Constants.pageState.home
-    }
-    
-    @IBAction func buyButtonPressed(_ sender: UIButton) {
-        switch pageState{
-            //submit coffee to api
-        case Constants.pageState.buy: confirmPurchase(); break
-            //transition to enter email
-        case Constants.pageState.home: transitionToPurchase(); break
-            //cancel back to home page
-        case Constants.pageState.redeem: cancelRedeem(); break
+            let alertController = UIAlertController(title: "Success!", message: defaultMessage, preferredStyle: .alert)
             
-        case Constants.pageState.confirmation: break
-        }
-    }
-    
-    @IBAction func redeemButtonPressed(_ sender: UIButton) {
-        switch pageState{
-            //cancel back to home page
-        case Constants.pageState.buy: cancelPurchase(); break
-            //Go to redeem page
-        case Constants.pageState.home: transitionToRedeem(); break
-            //confirm redemption of coffee
-        case Constants.pageState.redeem: confirmRedeem(); break
+            let okAction = UIAlertAction(title: "Ok", style: .default) { (_) in }
             
-        case Constants.pageState.confirmation: break
+            alertController.addAction(okAction)
+            
+            self.present(alertController, animated: true)
         }
-        
-        UIView.animate(withDuration: 0.5, animations: {
-            self.logo.transform = CGAffineTransform.init(translationX: 0.0, y: 0.0)
-            self.buttonStack.transform = CGAffineTransform.init(translationX: 0.0, y: 0.0)
-        })
-    }
-    
-    func buyToCancelButton(){
-        self.buyButton.setTitle("Cancel", for: .normal)
-        self.buyButton.backgroundColor = Constants.cancelRed
-        self.buyButton.setTitleColor(UIColor.white, for: .normal)
-    }
-    
-    func revertBuyButton(){
-        self.buyButton.setTitle("Buy", for: .normal)
-        self.buyButton.backgroundColor = Constants.darkBlue
-        self.buyButton.setTitleColor(UIColor.white, for: .normal)
-    }
-    
-    func redeemToCancelButton(){
-        self.redeemButton.setTitle("Cancel", for: .normal)
-        self.redeemButton.backgroundColor = Constants.cancelRed
-        self.redeemButton.setTitleColor(UIColor.white, for: .normal)
-    }
-    
-    func revertRedeemButton(){
-        self.redeemButton.setTitle("Redeem", for: .normal)
-        self.redeemButton.backgroundColor = UIColor.white
-        self.redeemButton.setTitleColor(Constants.darkBlue, for: .normal)
     }
 }
 

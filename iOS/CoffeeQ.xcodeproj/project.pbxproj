@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		153A41FC1EACF574009CCC72 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153A41FB1EACF574009CCC72 /* Constants.swift */; };
+		155CC9DE1F7088B500F5AC18 /* RedemptionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155CC9DD1F7088B500F5AC18 /* RedemptionResponse.swift */; };
+		155CC9E01F70892700F5AC18 /* CompleteRedemptionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155CC9DF1F70892700F5AC18 /* CompleteRedemptionRequest.swift */; };
+		155CC9E21F708B1600F5AC18 /* RedemptionFinalizedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155CC9E11F708B1600F5AC18 /* RedemptionFinalizedResponse.swift */; };
 		1564AABD1EBAA66500866F45 /* AlamofireService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1564AABC1EBAA66500866F45 /* AlamofireService.swift */; };
 		1564AABF1EBAA67E00866F45 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1564AABE1EBAA67E00866F45 /* Alamofire.framework */; };
 		1564AAC11EBAA78700866F45 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1564AAC01EBAA78700866F45 /* ObjectMapper.framework */; };
@@ -17,12 +20,17 @@
 		15814A6B1EAC14D800667EC5 /* CoffeeQ.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 15814A691EAC14D800667EC5 /* CoffeeQ.xcdatamodeld */; };
 		15814A6D1EAC14D800667EC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15814A6C1EAC14D800667EC5 /* Assets.xcassets */; };
 		15814A701EAC14D800667EC5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15814A6E1EAC14D800667EC5 /* LaunchScreen.storyboard */; };
+		1584C62B1F66320600544521 /* CompletePurchaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1584C62A1F66320600544521 /* CompletePurchaseRequest.swift */; };
+		1584C62D1F6632AF00544521 /* CompletePurchaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1584C62C1F6632AF00544521 /* CompletePurchaseResponse.swift */; };
 		15897B7A1EACF6E20023EAAA /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15897B791EACF6E20023EAAA /* NetworkHelper.swift */; };
 		90C4DAC5B6CE961196101BA2 /* Pods_CoffeeQ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 783A8CDA7B544FC1F71EEF2A /* Pods_CoffeeQ.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		153A41FB1EACF574009CCC72 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		155CC9DD1F7088B500F5AC18 /* RedemptionResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedemptionResponse.swift; sourceTree = "<group>"; };
+		155CC9DF1F70892700F5AC18 /* CompleteRedemptionRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompleteRedemptionRequest.swift; sourceTree = "<group>"; };
+		155CC9E11F708B1600F5AC18 /* RedemptionFinalizedResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedemptionFinalizedResponse.swift; sourceTree = "<group>"; };
 		1564AABC1EBAA66500866F45 /* AlamofireService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireService.swift; sourceTree = "<group>"; };
 		1564AABE1EBAA67E00866F45 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../Library/Developer/Xcode/DerivedData/CoffeeQ-efyiaycbaksramezofxldnlzzxwq/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
 		1564AAC01EBAA78700866F45 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = "../../../Library/Developer/Xcode/DerivedData/CoffeeQ-efyiaycbaksramezofxldnlzzxwq/Build/Products/Debug-iphonesimulator/ObjectMapper/ObjectMapper.framework"; sourceTree = "<group>"; };
@@ -34,6 +42,8 @@
 		15814A6C1EAC14D800667EC5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		15814A6F1EAC14D800667EC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		15814A711EAC14D800667EC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1584C62A1F66320600544521 /* CompletePurchaseRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompletePurchaseRequest.swift; sourceTree = "<group>"; };
+		1584C62C1F6632AF00544521 /* CompletePurchaseResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompletePurchaseResponse.swift; sourceTree = "<group>"; };
 		15897B791EACF6E20023EAAA /* NetworkHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		783A8CDA7B544FC1F71EEF2A /* Pods_CoffeeQ.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoffeeQ.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D49A12F9DAB626D59D757EE2 /* Pods-CoffeeQ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoffeeQ.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoffeeQ/Pods-CoffeeQ.debug.xcconfig"; sourceTree = "<group>"; };
@@ -75,6 +85,7 @@
 		15814A611EAC14D800667EC5 /* CoffeeQ */ = {
 			isa = PBXGroup;
 			children = (
+				1584C6261F6631B200544521 /* Models */,
 				153A41FB1EACF574009CCC72 /* Constants.swift */,
 				15814A621EAC14D800667EC5 /* AppDelegate.swift */,
 				15814A641EAC14D800667EC5 /* HomeViewController.swift */,
@@ -87,6 +98,42 @@
 				1564AABC1EBAA66500866F45 /* AlamofireService.swift */,
 			);
 			path = CoffeeQ;
+			sourceTree = "<group>";
+		};
+		1584C6261F6631B200544521 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1584C6291F6631DA00544521 /* Response */,
+				1584C6281F6631BE00544521 /* Request */,
+				1584C6271F6631B900544521 /* Domain */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		1584C6271F6631B900544521 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Domain;
+			sourceTree = "<group>";
+		};
+		1584C6281F6631BE00544521 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				1584C62A1F66320600544521 /* CompletePurchaseRequest.swift */,
+				155CC9DF1F70892700F5AC18 /* CompleteRedemptionRequest.swift */,
+			);
+			name = Request;
+			sourceTree = "<group>";
+		};
+		1584C6291F6631DA00544521 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				1584C62C1F6632AF00544521 /* CompletePurchaseResponse.swift */,
+				155CC9DD1F7088B500F5AC18 /* RedemptionResponse.swift */,
+				155CC9E11F708B1600F5AC18 /* RedemptionFinalizedResponse.swift */,
+			);
+			name = Response;
 			sourceTree = "<group>";
 		};
 		1C612B1309C94FE91ABCA050 /* Frameworks */ = {
@@ -143,7 +190,8 @@
 				TargetAttributes = {
 					15814A5E1EAC14D800667EC5 = {
 						CreatedOnToolsVersion = 8.2.1;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = Y5FCCYU9ER;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -233,10 +281,15 @@
 			files = (
 				15814A651EAC14D800667EC5 /* HomeViewController.swift in Sources */,
 				15814A6B1EAC14D800667EC5 /* CoffeeQ.xcdatamodeld in Sources */,
+				155CC9DE1F7088B500F5AC18 /* RedemptionResponse.swift in Sources */,
+				155CC9E01F70892700F5AC18 /* CompleteRedemptionRequest.swift in Sources */,
 				15897B7A1EACF6E20023EAAA /* NetworkHelper.swift in Sources */,
 				15814A631EAC14D800667EC5 /* AppDelegate.swift in Sources */,
+				1584C62D1F6632AF00544521 /* CompletePurchaseResponse.swift in Sources */,
+				155CC9E21F708B1600F5AC18 /* RedemptionFinalizedResponse.swift in Sources */,
 				1564AABD1EBAA66500866F45 /* AlamofireService.swift in Sources */,
 				153A41FC1EACF574009CCC72 /* Constants.swift in Sources */,
+				1584C62B1F66320600544521 /* CompletePurchaseRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,10 +413,15 @@
 			baseConfigurationReference = D49A12F9DAB626D59D757EE2 /* Pods-CoffeeQ.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = Y5FCCYU9ER;
 				INFOPLIST_FILE = CoffeeQ/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = CoffeeQ.CoffeeQ;
+				PRODUCT_BUNDLE_IDENTIFIER = com.coffeeq;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "c955b3cf-396f-4fb5-8de0-a4edffaf5d15";
+				PROVISIONING_PROFILE_SPECIFIER = "coffeeQ-dev";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -373,10 +431,15 @@
 			baseConfigurationReference = EEB9D479BBCCEECBE8B8CBB2 /* Pods-CoffeeQ.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = Y5FCCYU9ER;
 				INFOPLIST_FILE = CoffeeQ/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = CoffeeQ.CoffeeQ;
+				PRODUCT_BUNDLE_IDENTIFIER = com.coffeeq;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "c955b3cf-396f-4fb5-8de0-a4edffaf5d15";
+				PROVISIONING_PROFILE_SPECIFIER = "coffeeQ-dev";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

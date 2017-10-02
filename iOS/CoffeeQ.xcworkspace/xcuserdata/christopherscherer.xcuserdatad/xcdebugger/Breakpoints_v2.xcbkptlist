@@ -6,32 +6,112 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CoffeeQ/HomeViewController.swift"
-            timestampString = "515550378.489196"
+            filePath = "CoffeeQ/AlamofireService.swift"
+            timestampString = "527460070.805036"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "confirmPurchase()"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "makeRequest(_:_:_:_:_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CoffeeQ/HomeViewController.swift"
-            timestampString = "515550380.078381"
+            filePath = "CoffeeQ/AlamofireService.swift"
+            timestampString = "527460070.805036"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
-            landmarkName = "confirmPurchase()"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "makeRequest(_:_:_:_:_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CoffeeQ.AlamoFireService.makeRequest &lt;A where A: ObjectMapper.Mappable&gt; (Swift.String, Alamofire.HTTPMethod, Swift.Dictionary&lt;Swift.String, Any&gt;, Swift.Dictionary&lt;Swift.String, Swift.String&gt;, (Swift.Array&lt;A&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "CoffeeQ"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/christopherscherer/Desktop/CoffeeQ23/iOS/CoffeeQ/AlamofireService.swift"
+                  timestampString = "527470120.878026"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "95">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CoffeeQ.AlamoFireService.(makeRequest &lt;A where A: ObjectMapper.Mappable&gt; (Swift.String, Alamofire.HTTPMethod, Swift.Dictionary&lt;Swift.String, Any&gt;, Swift.Dictionary&lt;Swift.String, Swift.String&gt;, (Swift.Array&lt;A&gt;) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "CoffeeQ"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/christopherscherer/Desktop/CoffeeQ23/iOS/CoffeeQ/AlamofireService.swift"
+                  timestampString = "527470120.880242"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "59">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CoffeeQ/Constants.swift"
+            timestampString = "527468439.898501"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "getHeaders()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CoffeeQ/AlamofireService.swift"
+            timestampString = "528258277.154567"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "makeRequest(_:_:_:_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CoffeeQ/AlamofireService.swift"
+            timestampString = "528258282.258361"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "makeRequest(_:_:_:_:_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
